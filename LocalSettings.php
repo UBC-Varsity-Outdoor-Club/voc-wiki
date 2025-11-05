@@ -54,10 +54,10 @@ $wgEmailAuthentication = true;
 
 ## Database settings
 $wgDBtype           = "mysql";
-$wgDBserver         = "localhost";
-$wgDBname           = getenv("MEDIAWIKI_DB_NAME");
-$wgDBuser           = getenv("MEDIAWIKI_DB_USER");
-$wgDBpassword       = getenv("MEDIAWIKI_DB_PASSWORD");
+$wgDBserver         = "db";
+$wgDBname           = getenv("MYSQL_DATABASE");
+$wgDBuser           = getenv("MYSQL_USER");
+$wgDBpassword       = getenv("MYSQL_PASSWORD");
 
 # MySQL specific settings
 $wgDBprefix         = "";
@@ -100,11 +100,11 @@ $wgShellLocale = "en_US.utf8";
 # Site language code, should be one of the list in ./languages/Names.php
 $wgLanguageCode = "en";
 
-$wgSecretKey = "<SECRET KEY>";
+$wgSecretKey = getenv("MEDIAWIKI_SECRETKEY");
 
 # Site upgrade key. Must be set to a string (default provided) to turn on the
 # web installer while LocalSettings.php is in place
-$wgUpgradeKey = "<UPGRADE KEY";
+$wgUpgradeKey = getenv("MEDIAWIKI_UPDATEKEY");
 
 wfLoadSkin( 'Vector' );
 ## Default skin: you can change the default skin. Use the internal symbolic

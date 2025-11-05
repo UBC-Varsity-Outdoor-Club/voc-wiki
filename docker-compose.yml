@@ -1,8 +1,8 @@
 services:
   db:
     image: mariadb:10.11
+    container_name: mediawiki-db
     restart: always
-    entrypoint: ["/entrypoint.sh"]
     env_file:
       - .env
     volumes:
@@ -10,6 +10,7 @@ services:
 
   mediawiki:
     image: mediawiki:latest
+    container_name: mediawiki
     restart: unless-stopped
     ports:
       - "8080:80"
@@ -17,6 +18,7 @@ services:
       - .env
     volumes:
       - ./images:/var/html/images
+      - ./extensions:/var/www/html/extensions
       - ./LocalSettings.php:/var/www/html/LocalSettings.php
     depends_on:
       - db
