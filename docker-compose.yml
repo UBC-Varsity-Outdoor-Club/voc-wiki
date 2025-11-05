@@ -1,0 +1,24 @@
+services:
+  db:
+    image: mariadb:10.11
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/mysql
+
+  mediawiki:
+    image: mediawiki:latest
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    env_file:
+      - .env
+    volumes:
+      - ./images:/var/html/images
+      - ./LocalSettings.php:/var/www/html/LocalSettings.php
+    depends_on:
+      - db
+
+volumes:
+  db_data:
