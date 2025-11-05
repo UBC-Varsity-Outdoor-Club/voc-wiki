@@ -1,0 +1,8 @@
+<?php
+
+$wgCaptchaQuestions = [
+    "What does VOC stand for?" => "<ANSWER>",
+    "What's the process of wasting time without accomplishing anything (see the glossary)? Tip: you can get to the glossary page by searching for 'glossary' in the top-right search box." => "<ANSWER>",
+];
+
+?>
