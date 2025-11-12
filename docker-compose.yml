@@ -9,7 +9,7 @@ services:
       - db_data:/var/lib/mysql
 
   mediawiki:
-    image: mediawiki:latest
+    image: mediawiki:1.44
     container_name: mediawiki
     restart: unless-stopped
     ports:
@@ -20,6 +20,7 @@ services:
       - ./images:/var/html/images
       - ./extensions:/var/www/html/extensions
       - ./LocalSettings.php:/var/www/html/LocalSettings.php
+      - ./captcha.php:/var/www/html/captcha.php
     depends_on:
       - db
 

@@ -9,6 +9,7 @@
 #
 # Further documentation for configuration settings may be found at:
 # http://www.mediawiki.org/wiki/Manual:Configuration_settings
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 
 # Protect against web entry
 if ( !defined( 'MEDIAWIKI' ) ) {
@@ -104,7 +105,7 @@ $wgSecretKey = getenv("MEDIAWIKI_SECRETKEY");
 
 # Site upgrade key. Must be set to a string (default provided) to turn on the
 # web installer while LocalSettings.php is in place
-$wgUpgradeKey = getenv("MEDIAWIKI_UPDATEKEY");
+$wgUpgradeKey = getenv("MEDIAWIKI_UPGRADEKEY");
 
 wfLoadSkin( 'Vector' );
 ## Default skin: you can change the default skin. Use the internal symbolic
@@ -139,6 +140,22 @@ $wgLocaltimezone = "America/Vancouver";
 
 # Enabled Extensions. Most extensions are enabled by including the base extension file here
 # but check specific extension documentation for more details
+wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/QuestyCaptcha' ]);
+$wgCaptchaClass = 'QuestyCaptcha';
+@include(__DIR__ . 'captcha.php');
+
+$wgCaptchaTriggers['edit'] = true;
+$wgCaptchaTriggers['create'] = true;
+$wgCaptchaTriggers['addurl'] = true;
+
+wfLoadExtension( 'UserMerge' );
+$wgGroupPermissions['bureaucrat']['usermerge'] = true;
+$wgGroupPermissions['sysop']['usermerge'] = true;
+
+wfLoadExtension( 'CategoryTree' );
+
+wfLoadExtension( 'VisualEditor' );
+$wgDefaultUserOptions['visualeditor-enable'] = 1;
 
 # End of automatically generated settings.
 # Add more configuration options below.
