@@ -139,32 +139,6 @@ $wgLocaltimezone = "America/Vancouver";
 
 # Enabled Extensions. Most extensions are enabled by including the base extension file here
 # but check specific extension documentation for more details
-# The following extensions were automatically enabled:
-#require_once( "$IP/extensions/Renameuser/Renameuser.php" );
-wfLoadExtension( 'ParserFunctions' );
-$wgPFEnableStringFunctions = true;
-
-wfLoadExtension( 'Nuke' );
-
-wfLoadExtension( 'CheckUser' );
-
-wfLoadExtension( 'UserMerge' );
-$wgGroupPermissions['bureaucrat']['usermerge'] = true;
-
-wfLoadExtension( 'ConfirmEdit' );
-wfLoadExtension( 'ConfirmEdit/QuestyCaptcha' );
-$wgCaptchaClass = 'QuestyCaptcha';
-$captchaFileName = getenv("MEDIAWIKI_CAPTCHA_FILE");
-if (file_exists($captchaFileName)) {
-       require_once $captchaFileName;
-}
-$wgGroupPermissions['user']['skipcaptcha'] = true; 
-$wgCaptchaTriggers['edit'] = true;
-
-# Widgets extension
-wfLoadExtension( 'Widgets' );
-$wgGroupPermissions['sysop']['editwidgets'] = true;
-$wgGroupPermissions['sysop']['userrights'] = true;
 
 # End of automatically generated settings.
 # Add more configuration options below.
@@ -177,17 +151,6 @@ $wgDnsBlacklistUrls = array( 'xbl.spamhaus.org', 'opm.tornevall.org' );
 $wgMimeDetectorCommand = "file -bi";
 
 $wgFileExtensions = array( 'kmz', 'png', 'gif', 'jpg', 'jpeg', 'ogg','doc','xls','ppt','mp3','sxc','pdf', 'kml', 'kmz', 'odt', 'ods', 'gpx', 'csv', 'gpx', 'xlsx', 'docx', 'pptx' );
-
-wfLoadExtension( 'CategoryTree' );
-# Allow categories to be displayed by default in greater depth
-$wgCategoryTreeMaxDepth = array(CT_MODE_PAGES => 3, CT_MODE_ALL => 3, CT_MODE_CATEGORIES => 4);
-
-$wgExtraNamespaces[500] = "Archive";
-$wgExtraNamespaces[501] = "Archive_talk";
-
-# Extension: VisualEditor
-wfLoadExtension( 'VisualEditor' );
-$wgDefaultUserOptions['visualeditor-enable'] = 1;
 
 $wgVirtualRestConfig['modules']['parsoid'] = array(
        // URL to the Parsoid instance

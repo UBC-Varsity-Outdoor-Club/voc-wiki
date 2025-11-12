@@ -1,6 +1,1 @@
-[submodule "extensions/UserMerge"]
-	path = extensions/UserMerge
-	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/UserMerge
-[submodule "extensions/Widgets"]
-	path = extensions/Widgets
-	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/Widgets.git
+
