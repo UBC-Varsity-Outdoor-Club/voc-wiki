@@ -31,7 +31,7 @@ $wgServer           = getenv("MEDIAWIKI_URL");
 ## http://www.mediawiki.org/wiki/Manual:Short_URL
 $wgScriptPath       = "";
 $wgScriptExtension  = ".php";
-$wgArticlePath = "/wiki/$1";
+$wgArticlePath = "/$1";
 $wgUsePathInfo = true;
 
 ## The relative URL path to the skins directory
