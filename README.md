@@ -32,10 +32,10 @@ The VOC Wiki is a Mediawiki application running inside a Docker container. The v
    ```
 9. Restore uploaded files
     ```sh
-    docker cp images/ mediawiki:/var/www/html/images/
+    docker cp images/ mediawiki:/var/www/html
     docker exec -it mediawiki chown -R www-data:www-data /var/www/html/images
-    docker exec -it mediawiki chown -R 755 /var/www/html/images
-    docker exec -it mediawiki php maintenance/run.php generateThumbs
+    docker exec -it mediawiki chmod -R 755 /var/www/html/images
+    docker exec -it mediawiki php maintenance/run.php rebuildImages
     ```
 10. Enable the VisualEditor extension by uncommenting 
     ```php

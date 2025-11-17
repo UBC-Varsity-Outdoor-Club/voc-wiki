@@ -17,7 +17,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./images:/var/html/images
+      - ./images:/var/www/html/images
       - ./extensions:/var/www/html/extensions
       - ./LocalSettings.php:/var/www/html/LocalSettings.php
       - ./captcha.php:/var/www/html/captcha.php
