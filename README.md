@@ -8,7 +8,7 @@ The VOC Wiki is a Mediawiki application running inside a Docker container. The v
 5. Run the Docker container `docker compose up -d`
 6. Initialize the Mediawiki database
    ```sh
-    docker compose exec -it php maintenance/run.php install \
+    docker compose exec -it php mediawiki maintenance/run.php install \
         --dbname=<MYSQL_DATABASE> \
         --dbserver=db \
         --dbuser=<MYSQL_USER> 
