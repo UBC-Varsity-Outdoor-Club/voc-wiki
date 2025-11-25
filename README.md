@@ -6,35 +6,23 @@ The VOC Wiki is a Mediawiki application running inside a Docker container. The v
 3. Create a file named `captcha.php` and add the answers to the questions in `captcha.php.sample` (feel free to also change the questions, or add new ones)
 4. Build the Docker container `docker compose build`
 5. Run the Docker container `docker compose up -d`
-6. Install the Mediawiki application by running the following command and responding to the subsequent prompts using the relevant fields from `.env`
-   ```sh
-    docker compose exec -it mediawiki php maintenance/run.php install
-   ```
-   Make note of the admin username and password
+6. Visit the application in the browser (assuming you've already set up DNS, and configured nginx to proxy wiki traffic to port 8080 where the container is listening). You should see the Mediawiki web installer. Follow the instructions to install Mediawiki
+   1. (Make note of the admin username and password!)
 7. Copy the wiki backup into the Docker container
    ```sh
     docker cp backup.xml mediawiki:/backup.xml
    ```
-8. Restore the backup and rebuild the changes. The first step is expected to take a long time if you are using a backup including the full revisions history
+8.  Restore the backup and rebuild the changes. The first step is expected to take a long time if you are using a backup including the full revisions history. You may want to run it as a background docker process (`-d`) so that it doesn't stop when your SSH session terminates
    ```sh
     docker exec -it mediawiki php maintenance/run.php importDump /backup.xml
     docker exec -it mediawiki php maintenance/run.php rebuildrecentchanges
     docker exec -it mediawiki php maintenance/run.php initSiteStats
    ```
-9. Restore uploaded files
+9.  Restore uploaded files (copy the `images` directory from the current wiki)
     ```sh
-    docker cp images/ mediawiki:/var/www/html
-    docker exec -it mediawiki chown -R www-data:www-data /var/www/html/images
-    docker exec -it mediawiki chmod -R 755 /var/www/html/images
     docker exec -it mediawiki php maintenance/run.php rebuildImages
     ```
-10. Enable the VisualEditor extension by uncommenting 
-    ```php
-    wfLoadExtension( 'VisualEditor' );
-    $wgDefaultUserOptions['visualeditor-enable'] = 1;
-    ``` 
-    in LocalSettings.php and then running `docker compose exec -it mediawiki php maintenance/run.php update` to update the database schema
-11. As far as I can tell, the Main Page needs to be replicated manually. Do that.
+10. As far as I can tell, the Main Page needs to be replicated manually. Do that.
 
 ## Creating backups
 The backup used by the migration process above can be obtained by running:
