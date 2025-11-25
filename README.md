@@ -48,3 +48,6 @@ Allows a view of all categorized pages on the "Content" tab
 
 ### VisualEditor
 Enables a WYSIWYG editor for pages
+
+### ParserFunctions
+Used on several template pages
