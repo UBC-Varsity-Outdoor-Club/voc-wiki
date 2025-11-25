@@ -2,7 +2,7 @@
 The VOC Wiki is a Mediawiki application running inside a Docker container. The version of Mediawiki that the Docker container runs is defined in the `image` field of `docker-compose.yml`. If you decide to upgrade the version of Mediawiki, it is safest to build a separate container in case something goes wrong 
 ## Instructions for building the wiki ##
 1. Clone this repository, and update `docker-compose.yml` to the desired version of Mediawiki
-2. Create a file named `.env`, and add the settings included in `.env.sample` (for `MEDIAWIKI_SECRETKEY` and `MEDIAWIKI_UPGRADEKEY` you can generate strings using `openssl rand -hex 64`)
+2. Create a file named `.env`, and add the settings included in `.env.sample`
 3. Create a file named `captcha.php` and add the answers to the questions in `captcha.php.sample` (feel free to also change the questions, or add new ones)
 4. Build the Docker container `docker compose build`
 5. Run the Docker container `docker compose up -d`
