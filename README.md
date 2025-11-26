@@ -14,15 +14,17 @@ The VOC Wiki is a Mediawiki application running inside a Docker container. The v
    ```
 8.  Restore the backup and rebuild the changes. The first step is expected to take a long time if you are using a backup including the full revisions history. You may want to run it as a background docker process (`-d`) so that it doesn't stop when your SSH session terminates
    ```sh
-    docker exec -it mediawiki php maintenance/run.php importDump /backup.xml
+    docker exec -it -d mediawiki php maintenance/run.php importDump /backup.xml > /var/www/html/import.log 2>&1
     docker exec -it mediawiki php maintenance/run.php rebuildrecentchanges
     docker exec -it mediawiki php maintenance/run.php initSiteStats
    ```
 9.  Restore uploaded files (copy the `images` directory from the current wiki)
     ```sh
-    docker exec -it mediawiki php maintenance/run.php rebuildImages
+    docker cp images mediawiki:/var/www/html/images
+    docker exec -it mediawiki php maintenance/run.php importImages --conf /var/www/html/LocalSettings.php /var/www/html/images
     ```
-10. As far as I can tell, the Main Page needs to be replicated manually. Do that.
+
+10. The Main_Page doesn't come in with the import for some reason. To get around this, you can manually import it using the interface of the old wiki, import it into the new wiki under a different name, and then move it to the "Main Page" name. The same trickery can be applied to MediaWiki:Sidebar
 
 ## Creating backups
 The backup used by the migration process above can be obtained by running:
